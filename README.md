@@ -1,11 +1,23 @@
-<div align="center">
+# AZURE UTILITY
+Developer toolkit Android app by Trixx / Azure.
 
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
+## Tools
+- QRFORGE — QR & barcode generator + scanner
+- JSONLENS — JSON tree viewer
+- MARKITDOWN — Markdown editor with PDF export
+- CODEEDITOR — Syntax-highlighted code editor (25+ languages)
+- TEXTPAD — Plain text editor
 
-  <h1>Built with AI Studio</h2>
+## Build
+Requires JDK 17+. Clone and run:
+    ./gradlew assembleDebug
 
-  <p>The fastest path from prompt to production with Gemini.</p>
+APK output: app/build/outputs/apk/debug/app-debug.apk
 
-  <a href="https://aistudio.google.com/apps">Start building</a>
+## Icons
+Legacy PNG icons (mipmap-hdpi through mipmap-xxxhdpi) should be generated
+using Android Studio → File → New → Image Asset → select ic_launcher_foreground.xml
 
-</div>
+## CI
+GitHub Actions workflow builds debug APK on every push.
+Release APK requires keystore secrets configured in repository settings.

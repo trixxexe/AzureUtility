@@ -1,0 +1,6 @@
+{
+  "name": "AZURE UTILITY",
+  "description": "A dark, developer-grade toolkit featuring QRForge, JsonLens, MarkitDown, CodeEditor, and TextPad.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
