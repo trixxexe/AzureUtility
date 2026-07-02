@@ -61,9 +61,9 @@ jobs:
         run: |
           if [ -z "$KEYSTORE_FILE" ]; then
             echo "Warning: KEYSTORE_FILE secret is not set, generating a temporary keystore..."
-            keytool -genkey -v -keystore keystore.jks -alias temp_alias -keyalg RSA -keysize 2048 -validity 10000 -storepass "temppass" -keypass "temppass" -dname "CN=Azure, OU=Azure, O=Azure, L=Azure, S=Azure, C=Azure"
+            keytool -genkey -v -keystore app/keystore.jks -alias temp_alias -keyalg RSA -keysize 2048 -validity 10000 -storepass "temppass" -keypass "temppass" -dname "CN=Azure, OU=Azure, O=Azure, L=Azure, S=Azure, C=Azure"
           else
-            echo "$KEYSTORE_FILE" | base64 --decode > keystore.jks
+            echo "$KEYSTORE_FILE" | base64 --decode > app/keystore.jks
           fi
 
       - name: Build Release APK
