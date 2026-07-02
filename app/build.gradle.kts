@@ -40,13 +40,23 @@ android {
 
   buildTypes {
     release {
-      signingConfig = signingConfigs.getByName("release")
+      val keystoreFile = file(System.getenv("KEYSTORE_PATH") ?: "keystore.jks")
+      if (keystoreFile.exists()) {
+        signingConfig = signingConfigs.getByName("release")
+      } else {
+        signingConfig = signingConfigs.getByName("debug")
+      }
       isMinifyEnabled = true
       isShrinkResources = true
       proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
     }
     debug {
-      signingConfig = signingConfigs.getByName("debugConfig")
+      val keystoreFile = file("${rootDir}/debug.keystore")
+      if (keystoreFile.exists()) {
+        signingConfig = signingConfigs.getByName("debugConfig")
+      } else {
+        signingConfig = signingConfigs.getByName("debug")
+      }
     }
   }
   compileOptions {
