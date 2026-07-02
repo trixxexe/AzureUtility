@@ -21,21 +21,13 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-      - name: Cache Gradle Dependencies
-        uses: actions/cache@v4
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3
         with:
-          path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
-          key: ${{ runner.os }}-gradle-${{ hashFiles('gradle/wrapper/gradle-wrapper.properties', '**/*.gradle.kts') }}
-          restore-keys: |
-            ${{ runner.os }}-gradle-
-
-      - name: Make Gradlew Executable
-        run: chmod +x ./gradlew
+          gradle-version: 9.3.1
 
       - name: Build Debug APK
-        run: ./gradlew assembleDebug --stacktrace
+        run: gradle :app:assembleDebug --stacktrace
 
       - name: Upload Debug APK Artifact
         uses: actions/upload-artifact@v4
@@ -58,15 +50,10 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-      - name: Cache Gradle Dependencies
-        uses: actions/cache@v4
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3
         with:
-          path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
-          key: ${{ runner.os }}-gradle-${{ hashFiles('gradle/wrapper/gradle-wrapper.properties', '**/*.gradle.kts') }}
-          restore-keys: |
-            ${{ runner.os }}-gradle-
+          gradle-version: 9.3.1
 
       - name: Decode Keystore
         env:
@@ -79,16 +66,13 @@ jobs:
             echo "$KEYSTORE_FILE" | base64 --decode > keystore.jks
           fi
 
-      - name: Make Gradlew Executable
-        run: chmod +x ./gradlew
-
       - name: Build Release APK
         env:
           KEYSTORE_PATH: "keystore.jks"
           STORE_PASSWORD: ${{ secrets.STORE_PASSWORD || 'temppass' }}
           KEY_ALIAS: ${{ secrets.KEY_ALIAS || 'temp_alias' }}
           KEY_PASSWORD: ${{ secrets.KEY_PASSWORD || 'temppass' }}
-        run: ./gradlew assembleRelease --stacktrace
+        run: gradle :app:assembleRelease --stacktrace
 
       - name: Upload Release APK Artifact
         uses: actions/upload-artifact@v4

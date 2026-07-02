@@ -1,0 +1,13 @@
+# Auto-detect text files and perform LF normalization
+* text=auto
+
+# Declare files that must always have LF line endings
+*.sh text eol=lf
+*.bash text eol=lf
+
+# Treat binary files as binary
+*.jar binary
+*.png binary
+*.webp binary
+*.jpg binary
+*.keystore binary
